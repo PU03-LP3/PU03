@@ -5,17 +5,18 @@ public class User {
     private String fullName;
     private String email;
     private String password;
-    private boolean isAdmin;
     private java.util.Date createdAt;
+    private String role;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(int id, String fullName, String email, String password, boolean isAdmin, java.util.Date createdAt) {
+     public User(int id, String fullName, String email, String password, String role, java.util.Date createdAt) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.role = role;
         this.createdAt = createdAt;
     }
 
@@ -51,12 +52,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public String getRole() {
+        return role;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public java.util.Date getCreatedAt() {
@@ -65,5 +66,9 @@ public class User {
 
     public void setCreatedAt(java.util.Date createdAt) {
         this.createdAt = createdAt;
+    }
+    
+    public boolean isCitizen() {
+        return "CITIZEN".equalsIgnoreCase(this.role);
     }
 }
