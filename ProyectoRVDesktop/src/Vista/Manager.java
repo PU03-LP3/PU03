@@ -60,10 +60,12 @@ public class Manager extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbsolicitudes = new javax.swing.JTable();
         cmstatus = new javax.swing.JComboBox<>();
-        btupdate = new javax.swing.JButton();
-        btver = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnVerImg = new javax.swing.JButton();
         prgcerradas = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
+        bntDescargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,28 +80,45 @@ public class Manager extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id Reporte", "Titulo de Reporte", "Reportado Por", "Progreso"
             }
         ));
         jScrollPane1.setViewportView(tbsolicitudes);
+        if (tbsolicitudes.getColumnModel().getColumnCount() > 0) {
+            tbsolicitudes.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         cmstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btupdate.setText("ACTUALIZAR");
-        btupdate.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setText("ACTUALIZAR");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btupdateActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
 
-        btver.setText("VER IMAGEN");
-        btver.addActionListener(new java.awt.event.ActionListener() {
+        btnVerImg.setText("VER IMAGEN");
+        btnVerImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btverActionPerformed(evt);
+                btnVerImgActionPerformed(evt);
             }
         });
 
         jLabel2.setText("TU RATIO (CERRADAS)");
+
+        btnCerrarSesion.setText("CERRAR SESIÓN");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        bntDescargar.setText("DESCARGAR REPORTES");
+        bntDescargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntDescargarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,15 +134,19 @@ public class Manager extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(55, 55, 55)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(btnVerImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(prgcerradas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                                    .addComponent(jLabel2)
+                                    .addComponent(bntDescargar)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(btnCerrarSesion)))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,25 +154,29 @@ public class Manager extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btupdate)
+                        .addComponent(btnActualizar)
                         .addGap(32, 32, 32)
-                        .addComponent(btver)
+                        .addComponent(btnVerImg)
                         .addGap(65, 65, 65)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(prgcerradas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(prgcerradas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144)
+                        .addComponent(bntDescargar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCerrarSesion))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
     int fila = tbsolicitudes.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(this, "Seleccione una solicitud.");
@@ -168,9 +195,9 @@ public class Manager extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Error al actualizar el estado.");
     }
-    }//GEN-LAST:event_btupdateActionPerformed
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btverActionPerformed
+    private void btnVerImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerImgActionPerformed
     int fila = tbsolicitudes.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(this, "Seleccione una solicitud.");
@@ -197,7 +224,40 @@ public class Manager extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "No hay imagen disponible.");
     }
-    }//GEN-LAST:event_btverActionPerformed
+    }//GEN-LAST:event_btnVerImgActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        this.dispose(); 
+
+    // Abrir la ventana de login u otra ventana deseada
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void bntDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDescargarActionPerformed
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogTitle("Guardar PDF de reportes");
+        int seleccion = fileChooser.showSaveDialog(this);
+
+        if (seleccion == javax.swing.JFileChooser.APPROVE_OPTION) {
+            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            if (!ruta.toLowerCase().endsWith(".pdf")) {
+                ruta += ".pdf";
+            }
+
+            try {
+                Util.ExportarTablaPDF.exportarTablaConImagenes(
+                    tbsolicitudes,
+                    ruta,
+                    "Solicitudes Asignadas",
+                    managerNeg::obtenerFotoReporte
+                );
+                JOptionPane.showMessageDialog(this, "Exportación exitosa.");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al exportar PDF: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_bntDescargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,8 +295,10 @@ public class Manager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btupdate;
-    private javax.swing.JButton btver;
+    private javax.swing.JButton bntDescargar;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnVerImg;
     private javax.swing.JComboBox<String> cmstatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

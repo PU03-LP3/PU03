@@ -59,12 +59,14 @@ public class Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbsolicitudes = new javax.swing.JTable();
-        btdelegar = new javax.swing.JButton();
+        btnDelegar = new javax.swing.JButton();
         cbmanager = new javax.swing.JComboBox<>();
-        btver = new javax.swing.JButton();
+        btnVerImagen = new javax.swing.JButton();
         lbfecha = new javax.swing.JLabel();
-        btverprg = new javax.swing.JButton();
-        btverprg1 = new javax.swing.JButton();
+        btnVerPrg = new javax.swing.JButton();
+        btnCrearUsuario = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
+        btnDescargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,40 +81,57 @@ public class Admin extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id Reporte", "Titulo de Reporte", "Reportador Por", "Asignado a"
             }
         ));
         jScrollPane1.setViewportView(tbsolicitudes);
+        if (tbsolicitudes.getColumnModel().getColumnCount() > 0) {
+            tbsolicitudes.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
-        btdelegar.setText("DELEGAR");
-        btdelegar.addActionListener(new java.awt.event.ActionListener() {
+        btnDelegar.setText("DELEGAR");
+        btnDelegar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btdelegarActionPerformed(evt);
+                btnDelegarActionPerformed(evt);
             }
         });
 
         cbmanager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btver.setText("VER IMAGEN");
-        btver.addActionListener(new java.awt.event.ActionListener() {
+        btnVerImagen.setText("VER IMAGEN");
+        btnVerImagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btverActionPerformed(evt);
+                btnVerImagenActionPerformed(evt);
             }
         });
 
         lbfecha.setFont(new java.awt.Font("Liberation Sans", 3, 14)); // NOI18N
 
-        btverprg.setText("VER PROGRESOS");
-        btverprg.addActionListener(new java.awt.event.ActionListener() {
+        btnVerPrg.setText("VER PROGRESOS");
+        btnVerPrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btverprgActionPerformed(evt);
+                btnVerPrgActionPerformed(evt);
             }
         });
 
-        btverprg1.setText("CREAR USER");
-        btverprg1.addActionListener(new java.awt.event.ActionListener() {
+        btnCrearUsuario.setText("CREAR USUARIO");
+        btnCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btverprg1ActionPerformed(evt);
+                btnCrearUsuarioActionPerformed(evt);
+            }
+        });
+
+        btnCerrarSesion.setText("CERRAR SESIÓN");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        btnDescargar.setText("DESCARGAR REPORTES");
+        btnDescargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescargarActionPerformed(evt);
             }
         });
 
@@ -123,25 +142,29 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(cbmanager, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbmanager, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnVerPrg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnVerImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnDelegar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnCrearUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnDescargar))
+                                        .addGap(14, 14, 14))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
-                                .addComponent(lbfecha))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btverprg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btdelegar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btverprg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(14, 14, 14)))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCerrarSesion)
+                                    .addComponent(lbfecha)))))
+                    .addComponent(jLabel1))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,29 +172,31 @@ public class Admin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbmanager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btdelegar)
+                        .addComponent(btnDelegar)
                         .addGap(33, 33, 33)
-                        .addComponent(btver)
+                        .addComponent(btnVerImagen)
                         .addGap(30, 30, 30)
-                        .addComponent(btverprg)
+                        .addComponent(btnVerPrg)
                         .addGap(26, 26, 26)
-                        .addComponent(btverprg1)
+                        .addComponent(btnCrearUsuario)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnDescargar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbfecha)
-                        .addGap(133, 133, 133))))
+                        .addGap(104, 104, 104)
+                        .addComponent(btnCerrarSesion))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btdelegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdelegarActionPerformed
+    private void btnDelegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelegarActionPerformed
         int fila = tbsolicitudes.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(this, "Seleccione una solicitud.");
@@ -190,9 +215,9 @@ public class Admin extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Error al delegar.");
     }
-    }//GEN-LAST:event_btdelegarActionPerformed
+    }//GEN-LAST:event_btnDelegarActionPerformed
 
-    private void btverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btverActionPerformed
+    private void btnVerImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerImagenActionPerformed
     int fila = tbsolicitudes.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(this, "Seleccione una solicitud.");
@@ -222,9 +247,9 @@ public class Admin extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "No hay imagen disponible.");
     }
-    }//GEN-LAST:event_btverActionPerformed
+    }//GEN-LAST:event_btnVerImagenActionPerformed
 
-    private void btverprgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btverprgActionPerformed
+    private void btnVerPrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPrgActionPerformed
 List<String[]> progresos = adminNeg.obtenerProgresoManagers();
     if (progresos.isEmpty()) {
         JOptionPane.showMessageDialog(this, "No hay managers con reportes asignados.");
@@ -254,9 +279,9 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
     }
 
     JOptionPane.showMessageDialog(this, panel, "Progreso por Encargado", JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_btverprgActionPerformed
+    }//GEN-LAST:event_btnVerPrgActionPerformed
 
-    private void btverprg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btverprg1ActionPerformed
+    private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
  JTextField txtNombre = new JTextField();
     JTextField txtEmail = new JTextField();
     JPasswordField txtPassword = new JPasswordField();
@@ -293,8 +318,39 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
             JOptionPane.showMessageDialog(this, "Error al crear el usuario.");
         }
     }
-    }//GEN-LAST:event_btverprg1ActionPerformed
+    }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        this.dispose(); 
+    // Abrir la ventana de login u otra ventana deseada
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogTitle("Guardar PDF de reportes");
+        int seleccion = fileChooser.showSaveDialog(this);
+
+        if (seleccion == javax.swing.JFileChooser.APPROVE_OPTION) {
+            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            if (!ruta.toLowerCase().endsWith(".pdf")) {
+                ruta += ".pdf";
+            }
+
+            try {
+                Util.ExportarTablaPDF.exportarTablaConImagenes(
+                    tbsolicitudes,
+                    ruta,
+                    "Reporte de Solicitudes",
+                    adminNeg::obtenerFotoReporte // lambda
+                );
+                JOptionPane.showMessageDialog(this, "Exportación exitosa.");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al exportar PDF: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnDescargarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -331,10 +387,12 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btdelegar;
-    private javax.swing.JButton btver;
-    private javax.swing.JButton btverprg;
-    private javax.swing.JButton btverprg1;
+    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnCrearUsuario;
+    private javax.swing.JButton btnDelegar;
+    private javax.swing.JButton btnDescargar;
+    private javax.swing.JButton btnVerImagen;
+    private javax.swing.JButton btnVerPrg;
     private javax.swing.JComboBox<String> cbmanager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
