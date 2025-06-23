@@ -65,7 +65,6 @@ public class Manager extends javax.swing.JFrame {
         prgcerradas = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JButton();
-        bntDescargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,13 +112,6 @@ public class Manager extends javax.swing.JFrame {
             }
         });
 
-        bntDescargar.setText("DESCARGAR REPORTES");
-        bntDescargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntDescargarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,8 +133,7 @@ public class Manager extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(prgcerradas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(bntDescargar)))
+                                    .addComponent(jLabel2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addComponent(btnCerrarSesion)))))
@@ -165,9 +156,7 @@ public class Manager extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(prgcerradas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(144, 144, 144)
-                        .addComponent(bntDescargar)
-                        .addGap(18, 18, 18)
+                        .addGap(185, 185, 185)
                         .addComponent(btnCerrarSesion))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -234,31 +223,6 @@ public class Manager extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void bntDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntDescargarActionPerformed
-        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        fileChooser.setDialogTitle("Guardar PDF de reportes");
-        int seleccion = fileChooser.showSaveDialog(this);
-
-        if (seleccion == javax.swing.JFileChooser.APPROVE_OPTION) {
-            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-            if (!ruta.toLowerCase().endsWith(".pdf")) {
-                ruta += ".pdf";
-            }
-
-            try {
-                Util.ExportarTablaPDF.exportarTablaConImagenes(
-                    tbsolicitudes,
-                    ruta,
-                    "Solicitudes Asignadas",
-                    managerNeg::obtenerFotoReporte
-                );
-                JOptionPane.showMessageDialog(this, "Exportación exitosa.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al exportar PDF: " + e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_bntDescargarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -295,7 +259,6 @@ public class Manager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntDescargar;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnVerImg;

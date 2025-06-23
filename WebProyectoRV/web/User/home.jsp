@@ -89,8 +89,14 @@ Autor:
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4>Hola, <%= user.getFullName() %></h4>
-            <a href="reportar.jsp" class="btn btn-guinda">➕ Nuevo Reporte</a>
+            <div>
+                <a href="reportar.jsp" class="btn btn-guinda me-2">➕ Nuevo Reporte</a>
+                <form method="get" action="../UserReportPdfServlet" style="display: inline;">
+                    <button type="submit" class="btn btn-outline-primary">Descargar PDF</button>
+                </form>
+            </div>
         </div>
+            
              <!-- 6. LISTADO DE REPORTES -->
         <% if (reports.isEmpty()) { %>
         <!-- Mensaje cuando no hay reportes -->

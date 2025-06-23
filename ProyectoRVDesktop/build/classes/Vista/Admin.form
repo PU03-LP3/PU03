@@ -36,11 +36,10 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="btnVerPrg" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnVerPrg" alignment="0" pref="154" max="32767" attributes="0"/>
                                           <Component id="btnVerImagen" alignment="0" max="32767" attributes="0"/>
                                           <Component id="btnDelegar" alignment="0" max="32767" attributes="0"/>
                                           <Component id="btnCrearUsuario" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="btnDescargar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   </Group>
@@ -78,8 +77,6 @@
                       <Component id="btnVerPrg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="btnCrearUsuario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="btnDescargar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbfecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
@@ -209,14 +206,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarSesionActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnDescargar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="DESCARGAR REPORTES"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDescargarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -66,7 +66,6 @@ public class Admin extends javax.swing.JFrame {
         btnVerPrg = new javax.swing.JButton();
         btnCrearUsuario = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
-        btnDescargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,13 +127,6 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnDescargar.setText("DESCARGAR REPORTES");
-        btnDescargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDescargarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,11 +144,10 @@ public class Admin extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(btnVerPrg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnVerPrg, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                                             .addComponent(btnVerImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(btnDelegar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnCrearUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnDescargar))
+                                            .addComponent(btnCrearUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(14, 14, 14))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
@@ -183,8 +174,6 @@ public class Admin extends javax.swing.JFrame {
                         .addComponent(btnVerPrg)
                         .addGap(26, 26, 26)
                         .addComponent(btnCrearUsuario)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnDescargar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbfecha)
                         .addGap(104, 104, 104)
@@ -326,31 +315,6 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
         Login login = new Login();
         login.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
-    private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        fileChooser.setDialogTitle("Guardar PDF de reportes");
-        int seleccion = fileChooser.showSaveDialog(this);
-
-        if (seleccion == javax.swing.JFileChooser.APPROVE_OPTION) {
-            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-            if (!ruta.toLowerCase().endsWith(".pdf")) {
-                ruta += ".pdf";
-            }
-
-            try {
-                Util.ExportarTablaPDF.exportarTablaConImagenes(
-                    tbsolicitudes,
-                    ruta,
-                    "Reporte de Solicitudes",
-                    adminNeg::obtenerFotoReporte // lambda
-                );
-                JOptionPane.showMessageDialog(this, "Exportación exitosa.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al exportar PDF: " + e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnDescargarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -390,7 +354,6 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnCrearUsuario;
     private javax.swing.JButton btnDelegar;
-    private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnVerImagen;
     private javax.swing.JButton btnVerPrg;
     private javax.swing.JComboBox<String> cbmanager;
