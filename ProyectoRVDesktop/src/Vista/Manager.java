@@ -2,6 +2,8 @@ package Vista;
 
 import Negocio.LoginNeg;
 import Negocio.ManagerNeg;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,6 +21,7 @@ public class Manager extends javax.swing.JFrame {
     }
     public Manager(LoginNeg.UsuarioLogin user) {
         initComponents();
+        aplicarEstilos();
         this.currentUser = user;
         setTitle("Panel del Encargado - " + user.nombre);
         setLocationRelativeTo(null);
@@ -249,6 +252,7 @@ public class Manager extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Manager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -269,4 +273,59 @@ public class Manager extends javax.swing.JFrame {
     private javax.swing.JProgressBar prgcerradas;
     private javax.swing.JTable tbsolicitudes;
     // End of variables declaration//GEN-END:variables
+
+    private void aplicarEstilos() {
+            // Colores y fuentes
+            Color guinda = new Color(128, 0, 32);
+            Color rojoClaro = new Color(200, 0, 50);
+            Font fuenteNegrita = new Font("Arial", Font.BOLD, 14);
+            Font fuenteTitulo = new Font("Arial", Font.BOLD, 22);
+
+            // Fondo del JFrame
+            getContentPane().setBackground(guinda);
+
+            // Título
+            jLabel1.setForeground(Color.WHITE);
+            jLabel1.setFont(fuenteTitulo);
+
+            // Subtítulo o label adicional
+            jLabel2.setForeground(Color.WHITE);
+            jLabel2.setFont(fuenteNegrita);
+
+            // Botón Actualizar
+            btnActualizar.setBackground(rojoClaro);
+            btnActualizar.setForeground(Color.WHITE);
+            btnActualizar.setFont(fuenteNegrita);
+            btnActualizar.setFocusPainted(false);
+
+            // Botón Cerrar Sesión
+            btnCerrarSesion.setBackground(rojoClaro);
+            btnCerrarSesion.setForeground(Color.WHITE);
+            btnCerrarSesion.setFont(fuenteNegrita);
+            btnCerrarSesion.setFocusPainted(false);
+
+            // Botón Ver Imagen
+            btnVerImg.setBackground(rojoClaro);
+            btnVerImg.setForeground(Color.WHITE);
+            btnVerImg.setFont(fuenteNegrita);
+            btnVerImg.setFocusPainted(false);
+
+            // ComboBox cmstatus
+            cmstatus.setBackground(Color.WHITE);
+            cmstatus.setForeground(guinda.darker());
+            cmstatus.setFont(fuenteNegrita);
+
+            // ProgressBar
+            prgcerradas.setBackground(Color.WHITE);
+            prgcerradas.setForeground(rojoClaro);
+            prgcerradas.setFont(fuenteNegrita);
+
+            // Tabla
+            tbsolicitudes.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+            tbsolicitudes.getTableHeader().setForeground(Color.WHITE);
+            tbsolicitudes.getTableHeader().setBackground(new Color(90, 0, 20));
+            tbsolicitudes.setFont(new Font("Arial", Font.PLAIN, 13));
+            tbsolicitudes.setRowHeight(22);
+    }
 }
+

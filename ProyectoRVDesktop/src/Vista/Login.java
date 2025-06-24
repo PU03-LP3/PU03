@@ -5,11 +5,13 @@
 package Vista;
 
 import Negocio.LoginNeg;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author josue
+ * @author Richard
  */
 public class Login extends javax.swing.JFrame {
 
@@ -19,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        aplicarEstilos();
     }
 
     /**
@@ -38,11 +41,18 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setBackground(new java.awt.Color(153, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Email");
+        jLabel1.setText("Email:");
 
-        jLabel2.setText("Password");
+        jLabel2.setText("Password:");
 
+        btningreso.setBackground(new java.awt.Color(153, 0, 0));
+        btningreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btningreso.setForeground(new java.awt.Color(255, 255, 255));
         btningreso.setText("INGRESAR");
         btningreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +61,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 3, 18)); // NOI18N
-        jLabel3.setText("Login Administracion");
+        jLabel3.setText("Login Administración");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,19 +84,19 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtemail, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                            .addComponent(txtpass))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 64, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(61, 61, 61))
+                            .addComponent(txtpass)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)
+                        .addGap(22, 22, 22)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel3)
-                .addGap(48, 48, 48)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -161,6 +171,7 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -178,4 +189,41 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtemail;
     private javax.swing.JPasswordField txtpass;
     // End of variables declaration//GEN-END:variables
+
+    private void aplicarEstilos() {
+        // Color guinda general
+        Color guinda = new Color(128, 0, 32); 
+
+        // Fondo del JFrame
+        getContentPane().setBackground(guinda);
+
+        // Fuente para las etiquetas normales
+        Font fuenteNegrita = new Font("Arial", Font.BOLD, 14);
+
+        // Fuente para el título
+        Font fuenteTitulo = new Font("Arial", Font.BOLD, 24);
+
+        // Estilo para las etiquetas normales
+        jLabel1.setForeground(Color.WHITE);
+        jLabel1.setFont(fuenteNegrita);
+
+        jLabel2.setForeground(Color.WHITE);
+        jLabel2.setFont(fuenteNegrita);
+
+        // Estilo para el título (jLabel3)
+        jLabel3.setForeground(Color.WHITE);
+        jLabel3.setFont(fuenteTitulo);
+
+        // Estilo del botón
+        btningreso.setBackground(new Color(200, 0, 50)); // Un rojo más claro para el botón
+        btningreso.setForeground(Color.WHITE);
+        btningreso.setFont(fuenteNegrita);
+
+        // Estilo de los campos de texto
+        txtemail.setBackground(Color.WHITE);
+        txtemail.setFont(fuenteNegrita);
+
+        txtpass.setBackground(Color.WHITE);
+        txtpass.setFont(fuenteNegrita);
+    }
 }

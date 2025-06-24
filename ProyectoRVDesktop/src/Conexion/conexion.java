@@ -9,8 +9,8 @@ public class conexion {
         if (cnx == null || cnx.isClosed()) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                String url = "jdbc:mysql://localhost:3306/road_report_system?autoReconnect=true&useSSL=false";
-                cnx = DriverManager.getConnection(url, "root", "");
+                String url = "jdbc:mysql://161.132.45.136:3306/road_report_system?autoReconnect=true&useSSL=false";
+                cnx = DriverManager.getConnection(url, "usuario", "nestor");
             } catch (SQLException ex) {
                 throw new SQLException(ex);
             } catch (ClassNotFoundException ex) {

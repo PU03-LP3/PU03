@@ -37,21 +37,71 @@ public class AdminNeg {
     }
 
     public Map<String, Integer> obtenerManagers() {
-        Map<String, Integer> managers = new HashMap<>();
-        String sql = "SELECT id, full_name FROM users WHERE role = 'MANAGER'";
-        try (Connection cn = conexion.obtener();
-             Statement st = cn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+            Map<String, Integer> managers = new HashMap<>();
+            String sql = "SELECT id, full_name FROM users WHERE role = 'MANAGER'";
+            try (Connection cn = conexion.obtener();
+                 Statement st = cn.createStatement();
+                 ResultSet rs = st.executeQuery(sql)) {
 
-            while (rs.next()) {
-                managers.put(rs.getString("full_name"), rs.getInt("id"));
+                while (rs.next()) {
+                    managers.put(rs.getString("full_name"), rs.getInt("id"));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            return managers;
         }
-        return managers;
+public List<Map<String, Object>> obtenerTodasSolicitudesConDetalles() {
+    List<Map<String, Object>> solicitudes = new ArrayList<>();
+    String sql = """
+        SELECT r.id, r.title, r.description, r.reported_at, 
+               u.full_name AS ciudadano, u.email AS email_ciudadano,
+               IFNULL(m.full_name, 'Sin asignar') AS encargado,
+               IFNULL(m.email, '') AS email_encargado,
+               rs.status_name AS estado
+        FROM reports r
+        LEFT JOIN users u ON r.user_id = u.id
+        LEFT JOIN users m ON r.assigned_to = m.id
+        LEFT JOIN report_status rs ON r.status_id = rs.id
+        ORDER BY r.reported_at DESC
+    """;
+
+    try (Connection cn = conexion.obtener();
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+
+        while (rs.next()) {
+            Map<String, Object> solicitud = new HashMap<>();
+            solicitud.put("id", rs.getInt("id"));
+            solicitud.put("titulo", rs.getString("title"));
+            solicitud.put("descripcion", rs.getString("description"));
+            solicitud.put("fecha_creacion", rs.getTimestamp("reported_at"));  // Cambiado aquí
+            solicitud.put("ciudadano", rs.getString("ciudadano"));
+            solicitud.put("email_ciudadano", rs.getString("email_ciudadano"));
+            solicitud.put("encargado", rs.getString("encargado"));
+            solicitud.put("email_encargado", rs.getString("email_encargado"));
+            solicitud.put("estado", rs.getString("estado"));
+
+            List<byte[]> fotos = new ArrayList<>();
+            String fotoSql = "SELECT photo_data FROM report_photos WHERE report_id = ?";
+            try (PreparedStatement psFoto = cn.prepareStatement(fotoSql)) {
+                psFoto.setInt(1, rs.getInt("id"));
+                ResultSet rsFotos = psFoto.executeQuery();
+                while (rsFotos.next()) {
+                    fotos.add(rsFotos.getBytes("photo_data"));
+                }
+            }
+            solicitud.put("fotos", fotos);
+
+            solicitudes.add(solicitud);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return solicitudes;
+}
 
     public boolean delegarReporte(int reportId, int managerId) {
         String sql = "UPDATE reports SET assigned_to = ? WHERE id = ?";
