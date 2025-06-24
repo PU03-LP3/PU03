@@ -15,6 +15,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
 
 public class Admin extends javax.swing.JFrame {
     private final AdminNeg adminNeg = new AdminNeg();
@@ -65,6 +73,7 @@ public class Admin extends javax.swing.JFrame {
         lbfecha = new javax.swing.JLabel();
         btverprg = new javax.swing.JButton();
         btverprg1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +125,13 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("EXPORTAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,8 +154,9 @@ public class Admin extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btverprg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btdelegar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btverprg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btdelegar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btverprg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(14, 14, 14)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -157,12 +174,14 @@ public class Admin extends javax.swing.JFrame {
                         .addComponent(cbmanager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btdelegar)
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addComponent(btver)
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
                         .addComponent(btverprg)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(btverprg1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbfecha)
                         .addGap(133, 133, 133))))
@@ -295,6 +314,143 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
     }
     }//GEN-LAST:event_btverprg1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Guardar reporte PDF");
+    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos PDF", "pdf"));
+    fileChooser.setSelectedFile(new File("reporte_solicitudes.pdf"));
+    
+    int userSelection = fileChooser.showSaveDialog(this);
+    if (userSelection != JFileChooser.APPROVE_OPTION) {
+        return;
+    }
+    
+    final File finalFileToSave = fileChooser.getSelectedFile().getName().toLowerCase().endsWith(".pdf") 
+        ? fileChooser.getSelectedFile() 
+        : new File(fileChooser.getSelectedFile().getAbsolutePath() + ".pdf");
+    
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    panel.add(new JLabel("Exportando solicitudes a PDF..."));
+    panel.add(new JLabel("Click en 'OK' para continuar"));
+    panel.add(Box.createVerticalStrut(10));
+    
+    JOptionPane.showMessageDialog(this, panel, "Exportando", JOptionPane.INFORMATION_MESSAGE);
+
+    final Admin adminFrame = this;
+    
+    new Thread(() -> {
+        try {
+            exportarSolicitudesAPDF(finalFileToSave);
+            SwingUtilities.invokeLater(() -> {
+                JOptionPane.showMessageDialog(adminFrame, 
+                    "Exportación completada con éxito!", 
+                    "Éxito", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            SwingUtilities.invokeLater(() -> {
+                JOptionPane.showMessageDialog(adminFrame, 
+                    "Error al exportar: " + e.getMessage(), 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            });
+        }
+    }).start();
+    }//GEN-LAST:event_jButton1ActionPerformed
+private void exportarSolicitudesAPDF(File file) throws Exception {
+    List<Map<String, Object>> solicitudes = adminNeg.obtenerTodasSolicitudesConDetalles();
+    
+    Document document = new Document();
+    PdfWriter.getInstance(document, new FileOutputStream(file));
+    document.open();
+    
+    Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+    Font subtitleFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+    Font normalFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+
+    Paragraph title = new Paragraph("Reporte de Solicitudes", titleFont);
+    title.setAlignment(Element.ALIGN_CENTER);
+    title.setSpacingAfter(20);
+    document.add(title);
+    
+    Paragraph fecha = new Paragraph("Generado el: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()), normalFont);
+    fecha.setAlignment(Element.ALIGN_RIGHT);
+    fecha.setSpacingAfter(20);
+    document.add(fecha);
+    
+    int total = solicitudes.size();
+    int current = 0;
+    
+    for (Map<String, Object> solicitud : solicitudes) {
+        current++;
+        
+        Paragraph solicitudTitle = new Paragraph("Solicitud #" + solicitud.get("id") + ": " + solicitud.get("titulo"), subtitleFont);
+        solicitudTitle.setSpacingAfter(10);
+        document.add(solicitudTitle);
+        
+        PdfPTable table = new PdfPTable(2);
+        table.setWidthPercentage(100);
+        table.setSpacingBefore(10);
+        table.setSpacingAfter(10);
+        
+        addTableCell(table, "ID:", solicitud.get("id").toString(), normalFont);
+        addTableCell(table, "Título:", solicitud.get("titulo").toString(), normalFont);
+        addTableCell(table, "Descripción:", solicitud.get("descripcion").toString(), normalFont);
+        addTableCell(table, "Fecha creación:", new SimpleDateFormat("dd/MM/yyyy HH:mm").format(solicitud.get("fecha_creacion")), normalFont);
+        addTableCell(table, "Ciudadano:", solicitud.get("ciudadano").toString(), normalFont);
+        addTableCell(table, "Email ciudadano:", solicitud.get("email_ciudadano").toString(), normalFont);
+        addTableCell(table, "Encargado:", solicitud.get("encargado").toString(), normalFont);
+        addTableCell(table, "Email encargado:", solicitud.get("email_encargado").toString(), normalFont);
+        addTableCell(table, "Estado:", solicitud.get("estado").toString(), normalFont);
+        
+        document.add(table);
+
+        @SuppressWarnings("unchecked")
+        List<byte[]> fotos = (List<byte[]>) solicitud.get("fotos");
+        if (fotos != null && !fotos.isEmpty()) {
+            Paragraph imagenesTitle = new Paragraph("Imágenes adjuntas:", subtitleFont);
+            imagenesTitle.setSpacingBefore(15);
+            imagenesTitle.setSpacingAfter(10);
+            document.add(imagenesTitle);
+            
+            for (int i = 0; i < fotos.size(); i++) {
+                byte[] fotoBytes = fotos.get(i);
+                Image image = Image.getInstance(fotoBytes);
+                float documentWidth = document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin();
+                if (image.getWidth() > documentWidth) {
+                    image.scaleToFit(documentWidth, document.getPageSize().getHeight());
+                }
+                
+                document.add(image);
+                document.add(new Paragraph(" "));
+            }
+        }
+        
+        if (current < total) {
+            Paragraph separator = new Paragraph("------------------------------------------------------------------");
+            separator.setSpacingBefore(20);
+            separator.setSpacingAfter(20);
+            document.add(separator);
+        }
+    }
+    
+    document.close();
+}
+
+private void addTableCell(PdfPTable table, String label, String value, Font font) {
+    PdfPCell cellLabel = new PdfPCell(new Phrase(label, font));
+    cellLabel.setBorder(Rectangle.NO_BORDER);
+    cellLabel.setHorizontalAlignment(Element.ALIGN_RIGHT);
+    
+    PdfPCell cellValue = new PdfPCell(new Phrase(value, font));
+    cellValue.setBorder(Rectangle.NO_BORDER);
+    cellValue.setHorizontalAlignment(Element.ALIGN_LEFT);
+    
+    table.addCell(cellLabel);
+    table.addCell(cellValue);
+}
     /**
      * @param args the command line arguments
      */
@@ -336,6 +492,7 @@ List<String[]> progresos = adminNeg.obtenerProgresoManagers();
     private javax.swing.JButton btverprg;
     private javax.swing.JButton btverprg1;
     private javax.swing.JComboBox<String> cbmanager;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbfecha;
