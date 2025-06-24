@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/web/User/home.jsp</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/web/User/reportar.jsp</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Models/ReportStatus.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Conexion/conexion.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Models/User.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/web/index.jsp</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Controller/LogoutServlet.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Controller/UserController.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/ModelsDAO/UserDAO.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Controller/ImageServlet.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/Controller/ReportController.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/ModelsDAO/ReportStatusDAO.java</file>
-            <file>file:/C:/20_08_25/PU03/WebProyectoRV/src/java/ModelsDAO/ReportDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
